@@ -10,5 +10,5 @@ Feature: Sign out
       Then I should be signed in
       And I sign out
       Then I should see "Signed out"
-      When I return next time
+      When I go to the home page
       Then I should be signed out
