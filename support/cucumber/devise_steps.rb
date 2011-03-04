@@ -22,7 +22,7 @@ Given /^I am a new, authenticated user$/ do
 end
 
 Given /^I am signed up as "(.*)\/(.*)"$/ do |email, password|
-  Given %{I am not logged in}
+  Given %{I am not signed in}
   When %{I go to the sign up page}
   And %{I fill in "Email" with "#{email}"}
   And %{I fill in "Password" with "#{password}"}
@@ -33,7 +33,7 @@ Given /^I am signed up as "(.*)\/(.*)"$/ do |email, password|
 end
 
 When /^I sign in as "(.*)\/(.*)"$/ do |email, password|
-  Given %{I am not logged in}
+  Given %{I am not signed in}
   When %{I go to the sign in page}
   And %{I fill in "Email" with "#{email}"}
   And %{I fill in "Password" with "#{password}"}
@@ -41,7 +41,9 @@ When /^I sign in as "(.*)\/(.*)"$/ do |email, password|
 end
 
 Then /^I should be signed in$/ do
-  Then %{I should see "Signed in successfully."}
+  Then %{I should see "Sign out"}
+  And %{I should not see "Sign up"}
+  And %{I should not see "Sign in"}
 end
 
 Then /^I sign out$/ do
@@ -50,10 +52,10 @@ end
 
 Then /^I should be signed out$/ do
   And %{I should see "Sign up"}
-  And %{I should see "Login"}
-  And %{I should not see "Logout"}
+  And %{I should see "Sign in"}
+  And %{I should not see "Sign out"}
 end
 
-Given /^I am not logged in$/ do
+Given /^I am not signed in$/ do
   visit('/users/sign_out') # ensure that at least
 end
